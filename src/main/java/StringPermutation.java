@@ -1,0 +1,67 @@
+public class StringPermutation
+{
+    public static void main(String[] args)
+    {
+        String str = "ABC";
+        int n = str.length();
+        StringPermutation permutation = new StringPermutation();
+        System.out.println("---> permute_l_r(" + str + ","+0+","+(n-1)+")");
+        permutation.permute(str, 0, n-1, "---");
+    }
+
+    public static String space(int i){
+        String s = " ";
+        for(int k=0; k<i; k++){
+            s = s + " ";
+        }
+        return s;
+    }
+
+    /**
+     * permutation function
+     * @param str string to calculate permutation for
+     * @param l starting index
+     * @param r end index
+     */
+    private void permute(String str, int l, int r, String level)
+    {
+        if (l == r){
+            System.out.println(space(level.length()) + "GFGWaterProblem |");
+            System.out.println(space(level.length()) + "|");
+            System.out.println(space(level.length()) + level + " return " + str);
+            System.out.println();
+        }
+        else
+        {
+            for (int i = l; i <= r; i++)
+            {
+                System.out.println(space(level.length()) + "|");
+                System.out.println(space(level.length()) + "|");
+                str = swap_l_i(str,l,i);
+                System.out.println(space(level.length()) + level+ "> swap_l_i(" + str + ","+l+","+i+") : ["+ str + "] loop *i:l="+ l +" < i:r="+r);
+                System.out.println(space(level.length()) + "|");
+                System.out.println(space(level.length()) + "|");
+                System.out.println(space(level.length()) + level+ "> permute_l_r(" + str + ","+(l+1)+","+r+") <<< increase l by 1");
+                permute(str, l+1, r, level+level);
+            }
+        }
+    }
+
+    /**
+     * Swap Characters at position
+     * @param a string value
+     * @param i position 1
+     * @param j position 2
+     * @return swapped string
+     */
+    public String swap_l_i(String a, int i, int j)
+    {
+        char temp;
+        char[] charArray = a.toCharArray();
+        temp = charArray[i] ;
+        charArray[i] = charArray[j];
+        charArray[j] = temp;
+        return String.valueOf(charArray);
+    }
+
+}
